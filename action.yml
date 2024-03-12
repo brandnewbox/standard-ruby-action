@@ -14,12 +14,12 @@ runs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ inputs.ruby-version }}
-    - name: Install standardrb
+    - name: Install standard
       shell: bash
-      run: gem install standardrb:$(awk '/standard \(/ {sub(/\(/, ""); sub(/\)/, ""); print $2}' Gemfile.lock)
-    - name: Run standardrb
+      run: gem install standard:$(awk '/standard \(/ {sub(/\(/, ""); sub(/\)/, ""); print $2}' Gemfile.lock)
+    - name: Run standard
       shell: bash
-      run: standardrb --parallel -f github
+      run: standard --parallel -f github
 env:
   GITHUB_TOKEN: secrets.GITHUB_TOKEN
 branding:
