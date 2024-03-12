@@ -19,7 +19,7 @@ runs:
       run: gem install standard:$(awk '/standard \(/ {sub(/\(/, ""); sub(/\)/, ""); print $2}' Gemfile.lock)
     - name: Run standard
       shell: bash
-      run: standard --parallel -f github
+      run: gem exec standard --parallel -f github
 env:
   GITHUB_TOKEN: secrets.GITHUB_TOKEN
 branding:
