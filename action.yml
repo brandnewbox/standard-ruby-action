@@ -16,7 +16,7 @@ runs:
         ruby-version: ${{ inputs.ruby-version }}
     - name: Install standardrb
       shell: bash
-      run: gem install standardrb
+      run: gem install standardrb:$(awk '/standard \(/ {sub(/\(/, ""); sub(/\)/, ""); print $2}' Gemfile.lock)
     - name: Run standardrb
       shell: bash
       run: standardrb --parallel -f github
