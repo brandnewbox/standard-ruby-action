@@ -7,11 +7,17 @@ inputs:
     description: 'Ruby version'
     required: true
     default: '3.2.2'
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  env:
-    RUBY_VERSION: ${{ inputs.ruby-version }}
+  using: composite
+  steps:
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ inputs.ruby-version }}
+        bundler-cache: true
+    - name: Run standardrb
+      shell: bash
+      run: bundle exec standardrb --parallel -f github
 env:
   GITHUB_TOKEN: secrets.GITHUB_TOKEN
 branding:
