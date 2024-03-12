@@ -2,9 +2,25 @@
 name: 'StandardRB Action'
 description: 'A GitHub Action that lints your Ruby code with StandardRB!'
 author: 'Andrew Mason <andrewmcodes@protonmail.com>'
+inputs:
+  ruby-version: 
+    description: 'Ruby version'
+    required: true
+    default: '3.2.2'
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: composite
+  steps:
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ inputs.ruby-version }}
+        bundler: none
+    - name: Install standard
+      shell: bash
+      run: gem install standard:$(awk '/standard \(/ {sub(/\(/, ""); sub(/\)/, ""); print $2}' Gemfile.lock)
+    - name: Run standard
+      shell: bash
+      run: standardrb --parallel -f github
 env:
   GITHUB_TOKEN: secrets.GITHUB_TOKEN
 branding:
