@@ -14,6 +14,7 @@ runs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ inputs.ruby-version }}
+        bundler: none
     - name: Install standard
       shell: bash
       run: gem install standard:$(awk '/standard \(/ {sub(/\(/, ""); sub(/\)/, ""); print $2}' Gemfile.lock)
