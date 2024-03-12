@@ -1,4 +1,4 @@
-FROM ruby:${RUBY_VERSION:-3.2.2}-alpine
+FROM ruby:${INPUT_RUBY_VERSION:-3.2.2}-alpine
 
 RUN apk add --update build-base git
 
