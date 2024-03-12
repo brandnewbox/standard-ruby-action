@@ -1,4 +1,4 @@
-ARG RUBY_VERSION=${RUBY_VERSION:-3.2.2}
+ARG RUBY_VERSION=${RUBY_VERSION}
 FROM ruby:$RUBY_VERSION-alpine
 
 RUN apk add --update build-base git
