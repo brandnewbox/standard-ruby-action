@@ -14,10 +14,12 @@ runs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ inputs.ruby-version }}
-        bundler-cache: true
+    - name: Install standardrb
+      shell: bash
+      run: gem install standardrb
     - name: Run standardrb
       shell: bash
-      run: bundle exec standardrb --parallel -f github
+      run: standardrb --parallel -f github
 env:
   GITHUB_TOKEN: secrets.GITHUB_TOKEN
 branding:
