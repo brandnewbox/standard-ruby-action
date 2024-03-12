@@ -2,9 +2,16 @@
 name: 'StandardRB Action'
 description: 'A GitHub Action that lints your Ruby code with StandardRB!'
 author: 'Andrew Mason <andrewmcodes@protonmail.com>'
+inputs:
+  ruby-version: 
+    description: 'Ruby version'
+    required: true
+    default: '3.2.2'
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    RUBY_VERSION: ${{ inputs.ruby-version }}
 env:
   GITHUB_TOKEN: secrets.GITHUB_TOKEN
 branding:
