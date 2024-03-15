@@ -17,7 +17,7 @@ runs:
         bundler: none
     - name: Install standard
       shell: bash
-      run: gem install standard:$(awk '/standard \(/ {sub(/\(/, ""); sub(/\)/, ""); print $2}' Gemfile.lock)
+      run: gem install standard:$(awk '/standard \(/ {sub(/\(/, ""); sub(/\)/, ""); print $2; exit}' Gemfile.lock' Gemfile.lock)
     - name: Run standard
       shell: bash
       run: standardrb --parallel -f github
